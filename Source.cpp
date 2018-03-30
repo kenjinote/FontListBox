@@ -38,6 +38,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			SetFocus(hList);
 		}
 		break;
+	case WM_SIZE:
+		MoveWindow(hList, 10, 10, 256, HIWORD(lParam) - 20, TRUE);
+		MoveWindow(hEdit, 276, 10, LOWORD(lParam) - 286, HIWORD(lParam) - 20, TRUE);
+		break;
 	case WM_COMMAND:
 		if (LOWORD(wParam) == 100 && HIWORD(wParam) == LBN_SELCHANGE)
 		{
@@ -85,7 +89,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPreInst, LPSTR pCmdLine, int 
 	RegisterClass(&wndclass);
 	HWND hWnd = CreateWindow(
 		szClassName,
-		TEXT("フォント一覧"),
+		TEXT("インストール フォント 一覧"),
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		0,
